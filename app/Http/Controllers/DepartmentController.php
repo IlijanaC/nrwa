@@ -58,4 +58,3 @@ class DepartmentController extends Controller
         return redirect()->route('departments.index');
     }
 }
-
