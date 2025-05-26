@@ -1,0 +1,988 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bank Project API Documentation",
+        "description": "API endpoints for managing departments, products, and product types in the Bank Project.",
+        "contact": {
+            "email": "tvoj.email@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Bank Project API Server"
+        },
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/departments": {
+            "get": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Get all departments",
+                "description": "Returns a list of all departments.",
+                "operationId": "1cd271eb5c283ee0a0281bcde5ebc513",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Department"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Create a new department",
+                "description": "Creates a new department record.",
+                "operationId": "44ee53e947eb96a620abf4b108929e32",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "NAME"
+                                ],
+                                "properties": {
+                                    "NAME": {
+                                        "type": "string",
+                                        "example": "Finance"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Department created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Department"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation Error"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "NAME": [
+                                                    "The NAME field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/departments/{id}": {
+            "get": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Get department by ID",
+                "description": "Returns a single department by its ID.",
+                "operationId": "3d86649b5467e6456d18072469e417ab",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the department to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Department"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Department not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Department not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Update an existing department",
+                "description": "Updates an existing department record by ID.",
+                "operationId": "06350c81d509a48b638dc5cd0a787e66",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the department to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "NAME"
+                                ],
+                                "properties": {
+                                    "NAME": {
+                                        "type": "string",
+                                        "example": "Human Resources"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Department updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Department"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Department not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Department not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation Error"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "NAME": [
+                                                    "The NAME field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Delete a department",
+                "description": "Deletes a department record by ID.",
+                "operationId": "3d279271ee75bb2050d3c864f44ac456",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the department to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Department deleted successfully (No Content)"
+                    },
+                    "404": {
+                        "description": "Department not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Department not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all products",
+                "description": "Returns a list of all products, including their product type.",
+                "operationId": "7cd9d394f726672223f216b77acab086",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create a new product",
+                "description": "Creates a new product record.",
+                "operationId": "e83af3dd12f9ebc4ad755304893c016f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "PRODUCT_CD",
+                                    "NAME"
+                                ],
+                                "properties": {
+                                    "PRODUCT_CD": {
+                                        "type": "string",
+                                        "example": "PROD001"
+                                    },
+                                    "NAME": {
+                                        "type": "string",
+                                        "example": "Savings Account"
+                                    },
+                                    "DATE_OFFERED": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-01-01",
+                                        "nullable": true
+                                    },
+                                    "DATE_RETIRED": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-12-31",
+                                        "nullable": true
+                                    },
+                                    "PRODUCT_TYPE_CD": {
+                                        "description": "Must exist in Product Types",
+                                        "type": "string",
+                                        "example": "ACC",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation Error"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "PRODUCT_CD": [
+                                                    "The PRODUCT_CD has already been taken."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/products/{product_cd}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get product by code",
+                "description": "Returns a single product by its code, including its product type.",
+                "operationId": "ba635fa706071d6fab5492cb113cf7aa",
+                "parameters": [
+                    {
+                        "name": "product_cd",
+                        "in": "path",
+                        "description": "Code (PRODUCT_CD) of the product to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update an existing product",
+                "description": "Updates an existing product record by code.",
+                "operationId": "2549e1e159785b156648f41ee2069bd9",
+                "parameters": [
+                    {
+                        "name": "product_cd",
+                        "in": "path",
+                        "description": "Code (PRODUCT_CD) of the product to update",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "NAME"
+                                ],
+                                "properties": {
+                                    "PRODUCT_CD": {
+                                        "description": "Can be optionally updated",
+                                        "type": "string",
+                                        "example": "PROD001"
+                                    },
+                                    "NAME": {
+                                        "type": "string",
+                                        "example": "New Savings Account Name"
+                                    },
+                                    "DATE_OFFERED": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-01-01",
+                                        "nullable": true
+                                    },
+                                    "DATE_RETIRED": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2026-06-30",
+                                        "nullable": true
+                                    },
+                                    "PRODUCT_TYPE_CD": {
+                                        "description": "Must exist in Product Types",
+                                        "type": "string",
+                                        "example": "CHK",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation Error"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "NAME": [
+                                                    "The NAME field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete a product",
+                "description": "Deletes a product record by code.",
+                "operationId": "d24cca4dddaafe6040e7d5699c12d878",
+                "parameters": [
+                    {
+                        "name": "product_cd",
+                        "in": "path",
+                        "description": "Code (PRODUCT_CD) of the product to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Product deleted successfully (No Content)"
+                    },
+                    "404": {
+                        "description": "Product not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product_types": {
+            "get": {
+                "tags": [
+                    "Product Types"
+                ],
+                "summary": "Get all product types",
+                "description": "Returns a list of all product types.",
+                "operationId": "4c15fcb7e4cdc99700c94d79716b12fa",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProductType"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Product Types"
+                ],
+                "summary": "Create a new product type",
+                "description": "Creates a new product type record.",
+                "operationId": "f3c6a1e72cd0fae8c796a41ed6246af4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "PRODUCT_TYPE_CD"
+                                ],
+                                "properties": {
+                                    "PRODUCT_TYPE_CD": {
+                                        "type": "string",
+                                        "example": "LOAN"
+                                    },
+                                    "NAME": {
+                                        "type": "string",
+                                        "example": "Loan Product Type",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product Type created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductType"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation Error"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "PRODUCT_TYPE_CD": [
+                                                    "The PRODUCT_TYPE_CD has already been taken."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product_types/{product_type_cd}": {
+            "get": {
+                "tags": [
+                    "Product Types"
+                ],
+                "summary": "Get product type by code",
+                "description": "Returns a single product type by its code.",
+                "operationId": "025e0febbdc21b4a26a7990579de0830",
+                "parameters": [
+                    {
+                        "name": "product_type_cd",
+                        "in": "path",
+                        "description": "Code (PRODUCT_TYPE_CD) of the product type to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductType"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product Type not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product Type not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Product Types"
+                ],
+                "summary": "Update an existing product type",
+                "description": "Updates an existing product type record by code.",
+                "operationId": "7cee6303c80d52a25fdebcaec14fd77a",
+                "parameters": [
+                    {
+                        "name": "product_type_cd",
+                        "in": "path",
+                        "description": "Code (PRODUCT_TYPE_CD) of the product type to update",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "NAME": {
+                                        "type": "string",
+                                        "example": "New Loan Product Type Name",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product Type updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductType"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product Type not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product Type not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation Error"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "errors": {
+                                                    "NAME": [
+                                                        "The NAME field must be a string."
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Product Types"
+                ],
+                "summary": "Delete a product type",
+                "description": "Deletes a product type record by code.",
+                "operationId": "4bc077ecb7c5f448f0b5c1fe7f006758",
+                "parameters": [
+                    {
+                        "name": "product_type_cd",
+                        "in": "path",
+                        "description": "Code (PRODUCT_TYPE_CD) of the product type to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Product Type deleted successfully (No Content)"
+                    },
+                    "404": {
+                        "description": "Product Type not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product Type not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Department": {
+                "title": "Department",
+                "description": "Department model",
+                "properties": {
+                    "DEPT_ID": {
+                        "title": "ID",
+                        "description": "ID of the department",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "NAME": {
+                        "title": "Name",
+                        "description": "Name of the department",
+                        "type": "string",
+                        "example": "IT Department"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Department"
+                }
+            },
+            "Product": {
+                "title": "Product",
+                "description": "Product model",
+                "properties": {
+                    "PRODUCT_CD": {
+                        "title": "Product Code",
+                        "description": "Unique code for the product",
+                        "type": "string",
+                        "example": "PROD001"
+                    },
+                    "NAME": {
+                        "title": "Name",
+                        "description": "Name of the product",
+                        "type": "string",
+                        "example": "Current Account"
+                    },
+                    "DATE_OFFERED": {
+                        "title": "Date Offered",
+                        "description": "Date when the product was offered",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-01-01",
+                        "nullable": true
+                    },
+                    "DATE_RETIRED": {
+                        "title": "Date Retired",
+                        "description": "Date when the product was retired",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-12-31",
+                        "nullable": true
+                    },
+                    "PRODUCT_TYPE_CD": {
+                        "title": "Product Type Code (Foreign Key)",
+                        "description": "Foreign key to ProductType",
+                        "type": "string",
+                        "example": "CHK"
+                    },
+                    "product_type": {
+                        "$ref": "#/components/schemas/ProductType"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Product"
+                }
+            },
+            "ProductType": {
+                "title": "ProductType",
+                "description": "Product Type model",
+                "properties": {
+                    "PRODUCT_TYPE_CD": {
+                        "title": "Product Type Code",
+                        "description": "Unique code for the product type",
+                        "type": "string",
+                        "example": "ACC"
+                    },
+                    "NAME": {
+                        "title": "Name",
+                        "description": "Name of the product type",
+                        "type": "string",
+                        "example": "Account"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "ProductType"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Departments",
+            "description": "API Endpoints of Departments"
+        },
+        {
+            "name": "Product Types",
+            "description": "API Endpoints of Product Types"
+        },
+        {
+            "name": "Products",
+            "description": "API Endpoints of Products"
+        }
+    ]
+}
