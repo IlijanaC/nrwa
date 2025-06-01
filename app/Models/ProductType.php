@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use OpenApi\Annotations as OA;
 
-/**
+/** 
  * @OA\Schema(
  * title="ProductType",
  * description="Product Type model",

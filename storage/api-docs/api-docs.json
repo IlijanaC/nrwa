@@ -27,12 +27,12 @@
                 "tags": [
                     "Departments"
                 ],
-                "summary": "Get all departments",
-                "description": "Returns a list of all departments.",
+                "summary": "Dohvati sve departmane",
+                "description": "Vraca listu svih departmana.",
                 "operationId": "1cd271eb5c283ee0a0281bcde5ebc513",
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Uspjesno dohvacena lista departmana",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -43,7 +43,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup - potrebna Basic HTTP autentifikacija."
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             },
             "post": {
@@ -106,8 +112,16 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
             }
         },
         "/api/departments/{id}": {
@@ -155,7 +169,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             },
             "put": {
@@ -245,7 +265,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             },
             "delete": {
@@ -285,7 +311,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             }
         },
@@ -310,7 +342,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup - potrebna Basic HTTP autentifikacija."
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             },
             "post": {
@@ -364,7 +402,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Product created successfully",
+                        "description": "Proizvod uspjesno kreiran",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -374,7 +412,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error",
+                        "description": "Greska validacije",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -396,7 +434,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             }
         },
@@ -445,7 +489,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             },
             "put": {
@@ -558,7 +608,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             },
             "delete": {
@@ -598,7 +654,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             }
         },
@@ -623,7 +685,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup - potrebna Basic HTTP autentifikacija."
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             },
             "post": {
@@ -691,7 +759,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             }
         },
@@ -740,7 +814,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             },
             "put": {
@@ -830,7 +910,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             },
             "delete": {
@@ -870,7 +956,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Neautoriziran pristup"
                     }
+                },
+                "security": {
+                    "basicAuth": {}
                 }
             }
         }
@@ -969,6 +1061,13 @@
                     "name": "ProductType"
                 }
             }
+        },
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic",
+                "description": "HTTP Basic Authentication (Koristi e-mail i lozinku testnog korisnika)"
+            }
         }
     },
     "tags": [
@@ -983,6 +1082,11 @@
         {
             "name": "Products",
             "description": "API Endpoints of Products"
+        }
+    ],
+    "security": [
+        {
+            "basicAuth": []
         }
     ]
 }

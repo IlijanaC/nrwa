@@ -9,15 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException; // <-- Dodana ova linija za validaciju
 use OpenApi\Annotations as OA;
 
-
-class ProductApiController extends Controller // <-- ISPRAVLJENO IME KLASE!
+class ProductApiController extends Controller 
 {
-     /**
+     /** 
      * @OA\Get(
      * path="/api/products",
      * tags={"Products"},
      * summary="Get all products",
      * description="Returns a list of all products, including their product type.",
+     * security={"basicAuth": {}},
      * @OA\Response(
      * response=200,
      * description="Successful operation",
@@ -25,6 +25,10 @@ class ProductApiController extends Controller // <-- ISPRAVLJENO IME KLASE!
      * type="array",
      * @OA\Items(ref="#/components/schemas/Product")
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup - potrebna Basic HTTP autentifikacija."
      * )
      * )
      */
@@ -41,12 +45,13 @@ class ProductApiController extends Controller // <-- ISPRAVLJENO IME KLASE!
     // Možeš ih obrisati ili ostaviti prazne, neće smetati.
     // public function create() { /* ... */ }
 
-    /**
+    /** 
      * @OA\Post(
      * path="/api/products",
      * tags={"Products"},
      * summary="Create a new product",
      * description="Creates a new product record.",
+     * security={"basicAuth": {}},
      * @OA\RequestBody(
      * required=true,
      * @OA\JsonContent(
@@ -60,16 +65,20 @@ class ProductApiController extends Controller // <-- ISPRAVLJENO IME KLASE!
      * ),
      * @OA\Response(
      * response=201,
-     * description="Product created successfully",
+     * description="Proizvod uspjesno kreiran",
      * @OA\JsonContent(ref="#/components/schemas/Product")
      * ),
      * @OA\Response(
      * response=422,
-     * description="Validation Error",
+     * description="Greska validacije",
      * @OA\JsonContent(
      * @OA\Property(property="message", type="string", example="Validation Error"),
      * @OA\Property(property="errors", type="object", example={"PRODUCT_CD": {"The PRODUCT_CD has already been taken."}})
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */
@@ -101,12 +110,13 @@ class ProductApiController extends Controller // <-- ISPRAVLJENO IME KLASE!
         }
     }
 
-    /**
+    /** 
      * @OA\Get(
      * path="/api/products/{product_cd}",
      * tags={"Products"},
      * summary="Get product by code",
      * description="Returns a single product by its code, including its product type.",
+     * security={"basicAuth": {}},
      * @OA\Parameter(
      * name="product_cd",
      * in="path",
@@ -125,6 +135,10 @@ class ProductApiController extends Controller // <-- ISPRAVLJENO IME KLASE!
      * @OA\JsonContent(
      * @OA\Property(property="message", type="string", example="Product not found")
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */
@@ -145,12 +159,13 @@ class ProductApiController extends Controller // <-- ISPRAVLJENO IME KLASE!
     // Nema potrebe za 'edit' metodom u API kontroleru.
     // public function edit($id) { /* ... */ }
 
-    /**
+    /** 
      * @OA\Put(
      * path="/api/products/{product_cd}",
      * tags={"Products"},
      * summary="Update an existing product",
      * description="Updates an existing product record by code.",
+     * security={"basicAuth": {}},
      * @OA\Parameter(
      * name="product_cd",
      * in="path",
@@ -188,6 +203,10 @@ class ProductApiController extends Controller // <-- ISPRAVLJENO IME KLASE!
      * @OA\Property(property="message", type="string", example="Validation Error"),
      * @OA\Property(property="errors", type="object", example={"NAME": {"The NAME field is required."}})
      * )
+     *  ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */
@@ -222,12 +241,13 @@ class ProductApiController extends Controller // <-- ISPRAVLJENO IME KLASE!
         }
     }
 
-     /**
+     /** 
      * @OA\Delete(
      * path="/api/products/{product_cd}",
      * tags={"Products"},
      * summary="Delete a product",
      * description="Deletes a product record by code.",
+     * security={"basicAuth": {}},
      * @OA\Parameter(
      * name="product_cd",
      * in="path",
@@ -245,6 +265,10 @@ class ProductApiController extends Controller // <-- ISPRAVLJENO IME KLASE!
      * @OA\JsonContent(
      * @OA\Property(property="message", type="string", example="Product not found")
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use OpenApi\Annotations as OA;
 
-/**
+/** 
  * @OA\Schema(
  * title="Department",
  * description="Department model",

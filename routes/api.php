@@ -7,7 +7,11 @@ use App\Http\Controllers\Api\ProductTypeApiController;
 use App\Http\Controllers\Api\ProductApiController;
 
 
-// Resursne rute za tvoje API kontrolere
-Route::apiResource('departments', DepartmentApiController::class); // Koristi apiResource
-Route::apiResource('product_types', ProductTypeApiController::class);
-Route::apiResource('products', ProductApiController::class);
+// Grupira sve API rute koje zahtijevaju HTTP Basic autentifikaciju
+// Svaki zahtjev prema ovim rutama morat će sadržavati Authorization: Basic zaglavlje.
+Route::middleware('auth.basic')->group(function () {
+    // Resursne rute za tvoje API kontrolere
+    Route::apiResource('departments', DepartmentApiController::class);
+    Route::apiResource('product_types', ProductTypeApiController::class);
+    Route::apiResource('products', ProductApiController::class);
+});

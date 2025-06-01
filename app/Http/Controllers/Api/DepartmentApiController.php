@@ -8,55 +8,27 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use OpenApi\Annotations as OA;
 
-/**
- * @OA\Info(
- * version="1.0.0",
- * title="Bank Project API Documentation",
- * description="API endpoints for managing departments, products, and product types in the Bank Project.",
- * @OA\Contact(
- * email="tvoj.email@example.com"
- * ),
- * @OA\License(
- * name="Apache 2.0",
- * url="http://www.apache.org/licenses/LICENSE-2.0.html"
- * )
- * )
- *
- * @OA\Server(
- * url=L5_SWAGGER_CONST_HOST,
- * description="Bank Project API Server"
- * )
- *
- * @OA\Tag(
- * name="Departments",
- * description="API Endpoints of Departments"
- * )
- * @OA\Tag(
- * name="Product Types",
- * description="API Endpoints of Product Types"
- * )
- * @OA\Tag(
- * name="Products",
- * description="API Endpoints of Products"
- * )
- */
-
 class DepartmentApiController extends Controller 
 {
 
-     /**
+     /** 
      * @OA\Get(
      * path="/api/departments",
      * tags={"Departments"},
-     * summary="Get all departments",
-     * description="Returns a list of all departments.",
+     * summary="Dohvati sve departmane",
+     * description="Vraca listu svih departmana.",
+     * security={"basicAuth": {}},
      * @OA\Response(
      * response=200,
-     * description="Successful operation",
+     * description="Uspjesno dohvacena lista departmana",
      * @OA\JsonContent(
      * type="array",
      * @OA\Items(ref="#/components/schemas/Department")
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup - potrebna Basic HTTP autentifikacija."
      * )
      * )
      */
@@ -75,17 +47,18 @@ class DepartmentApiController extends Controller
         // Možeš je ukloniti ili ostaviti praznu ako se ne koristi.
     }
 
-    /**
+    /** 
      * @OA\Post(
      * path="/api/departments",
      * tags={"Departments"},
      * summary="Create a new department",
      * description="Creates a new department record.",
+     * security={{"basicAuth": {}}},
      * @OA\RequestBody(
      * required=true,
      * @OA\JsonContent(
      * required={"NAME"},
-     * @OA\Property(property="NAME", type="string", example="Finance"),
+     * @OA\Property(property="NAME", type="string", example="Finance")
      * )
      * ),
      * @OA\Response(
@@ -100,6 +73,10 @@ class DepartmentApiController extends Controller
      * @OA\Property(property="message", type="string", example="Validation Error"),
      * @OA\Property(property="errors", type="object", example={"NAME": {"The NAME field is required."}})
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */
@@ -119,12 +96,13 @@ class DepartmentApiController extends Controller
         }
     }
 
-      /**
+      /** 
      * @OA\Get(
      * path="/api/departments/{id}",
      * tags={"Departments"},
      * summary="Get department by ID",
      * description="Returns a single department by its ID.",
+     * security={"basicAuth": {}},
      * @OA\Parameter(
      * name="id",
      * in="path",
@@ -143,6 +121,10 @@ class DepartmentApiController extends Controller
      * @OA\JsonContent(
      * @OA\Property(property="message", type="string", example="Department not found")
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */
@@ -164,12 +146,13 @@ class DepartmentApiController extends Controller
         // Možeš je ukloniti ili ostaviti praznu ako se ne koristi.
     }
 
-      /**
+      /** 
      * @OA\Put(
      * path="/api/departments/{id}",
      * tags={"Departments"},
      * summary="Update an existing department",
      * description="Updates an existing department record by ID.",
+     * security={"basicAuth": {}},
      * @OA\Parameter(
      * name="id",
      * in="path",
@@ -181,7 +164,7 @@ class DepartmentApiController extends Controller
      * required=true,
      * @OA\JsonContent(
      * required={"NAME"},
-     * @OA\Property(property="NAME", type="string", example="Human Resources"),
+     * @OA\Property(property="NAME", type="string", example="Human Resources")
      * )
      * ),
      * @OA\Response(
@@ -203,6 +186,10 @@ class DepartmentApiController extends Controller
      * @OA\Property(property="message", type="string", example="Validation Error"),
      * @OA\Property(property="errors", type="object", example={"NAME": {"The NAME field is required."}})
      * )
+     *  ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */ 
@@ -227,12 +214,13 @@ class DepartmentApiController extends Controller
         }
     }
 
-        /**
+        /** 
      * @OA\Delete(
      * path="/api/departments/{id}",
      * tags={"Departments"},
      * summary="Delete a department",
      * description="Deletes a department record by ID.",
+     * security={"basicAuth": {}},
      * @OA\Parameter(
      * name="id",
      * in="path",
@@ -250,6 +238,10 @@ class DepartmentApiController extends Controller
      * @OA\JsonContent(
      * @OA\Property(property="message", type="string", example="Department not found")
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */

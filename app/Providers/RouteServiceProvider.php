@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Cache\RateLimiting\Limit; // DODAJ OVU LINIJU
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Request; // DODAJ OVU LINIJU
+use Illuminate\Support\Facades\RateLimiter; // DODAJ OVU LINIJU
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
@@ -40,16 +43,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
-        // Ostavljamo prazno ili dodajemo standardnu implementaciju ako Laravel to zahtijeva.
-        // Za tvoju svrhu, ova metoda može biti prazna ili imati standardnu implementaciju Laravel rate limitera.
-        // Ako ti se pojavi greška da 'configureRateLimiting' ne postoji, zakomentiraj liniju `$this->configureRateLimiting();` u boot metodi.
-        // Ali najbolje je dodati standardnu implementaciju.
-        // Evo standardne (ili je izostavi ako ne dobiješ grešku, Laravel će se valjda snaći)
-
-        /*
+        // OVAJ DIO JE ISPRAVLJEN
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
-        */
     }
 }

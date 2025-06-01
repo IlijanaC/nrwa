@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api; // VAŽNO: Promijenjen namespace!
+namespace App\Http\Controllers\Api; 
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductType;
@@ -8,15 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use OpenApi\Annotations as OA;
 
-class ProductTypeApiController extends Controller // PROMIJENJENO OVDJE!
+class ProductTypeApiController extends Controller 
 {
 
-     /**
+     /** 
      * @OA\Get(
      * path="/api/product_types",
      * tags={"Product Types"},
      * summary="Get all product types",
      * description="Returns a list of all product types.",
+     * security={"basicAuth": {}},
      * @OA\Response(
      * response=200,
      * description="Successful operation",
@@ -24,6 +25,10 @@ class ProductTypeApiController extends Controller // PROMIJENJENO OVDJE!
      * type="array",
      * @OA\Items(ref="#/components/schemas/ProductType")
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup - potrebna Basic HTTP autentifikacija."
      * )
      * )
      */
@@ -41,12 +46,13 @@ class ProductTypeApiController extends Controller // PROMIJENJENO OVDJE!
         // Prazno
     }
 
-    /**
+    /** 
      * @OA\Post(
      * path="/api/product_types",
      * tags={"Product Types"},
      * summary="Create a new product type",
      * description="Creates a new product type record.",
+     * security={"basicAuth": {}},
      * @OA\RequestBody(
      * required=true,
      * @OA\JsonContent(
@@ -67,6 +73,10 @@ class ProductTypeApiController extends Controller // PROMIJENJENO OVDJE!
      * @OA\Property(property="message", type="string", example="Validation Error"),
      * @OA\Property(property="errors", type="object", example={"PRODUCT_TYPE_CD": {"The PRODUCT_TYPE_CD has already been taken."}})
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */
@@ -87,12 +97,13 @@ class ProductTypeApiController extends Controller // PROMIJENJENO OVDJE!
         }
     }
 
-    /**
+    /** 
      * @OA\Get(
      * path="/api/product_types/{product_type_cd}",
      * tags={"Product Types"},
      * summary="Get product type by code",
      * description="Returns a single product type by its code.",
+     * security={"basicAuth": {}},
      * @OA\Parameter(
      * name="product_type_cd",
      * in="path",
@@ -111,6 +122,10 @@ class ProductTypeApiController extends Controller // PROMIJENJENO OVDJE!
      * @OA\JsonContent(
      * @OA\Property(property="message", type="string", example="Product Type not found")
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */
@@ -131,12 +146,13 @@ class ProductTypeApiController extends Controller // PROMIJENJENO OVDJE!
         // Prazno
     }
     
-    /**
+    /** 
      * @OA\Put(
      * path="/api/product_types/{product_type_cd}",
      * tags={"Product Types"},
      * summary="Update an existing product type",
      * description="Updates an existing product type record by code.",
+     * security={"basicAuth": {}},
      * @OA\Parameter(
      * name="product_type_cd",
      * in="path",
@@ -169,6 +185,10 @@ class ProductTypeApiController extends Controller // PROMIJENJENO OVDJE!
      * @OA\Property(property="message", type="string", example="Validation Error"),
      * @OA\Property(property="errors", type="object", example={"errors": {"NAME": {"The NAME field must be a string."}}})
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */
@@ -196,12 +216,13 @@ class ProductTypeApiController extends Controller // PROMIJENJENO OVDJE!
         }
     }
 
-    /**
+    /** 
      * @OA\Delete(
      * path="/api/product_types/{product_type_cd}",
      * tags={"Product Types"},
      * summary="Delete a product type",
      * description="Deletes a product type record by code.",
+     * security={"basicAuth": {}},
      * @OA\Parameter(
      * name="product_type_cd",
      * in="path",
@@ -219,6 +240,10 @@ class ProductTypeApiController extends Controller // PROMIJENJENO OVDJE!
      * @OA\JsonContent(
      * @OA\Property(property="message", type="string", example="Product Type not found")
      * )
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Neautoriziran pristup"
      * )
      * )
      */

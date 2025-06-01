@@ -44,6 +44,7 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                  */
                 'annotations' => [
+                       base_path('app/OpenApiSpec.php'),
                        app_path('Http/Controllers/Api'), // Putanja do tvojih API kontrolera
                        app_path('Models'),             // Putanja do tvojih modela
                 ],
@@ -194,6 +195,14 @@ return [
                 ],
                 */
 
+                  // ***** DODANO ZA BASIC AUTH *****
+                'basicAuth' => [
+                    'type' => 'http',
+                    'scheme' => 'basic',
+                    'description' => 'HTTP Basic Authentication (Koristi e-mail i lozinku testnog korisnika)',
+                ],
+                // ********************************
+
                 /* Open API 3.0 support
                 'passport' => [ // Unique name of security
                     'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
@@ -222,14 +231,7 @@ return [
                  * Examples of Securities
                  */
                 [
-                    /*
-                    'oauth2_security_example' => [
-                        'read',
-                        'write'
-                    ],
-
-                    'passport' => []
-                    */
+                   'basicAuth' => []
                 ],
             ],
         ],
