@@ -5,6 +5,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -66,5 +67,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/product-types/{product_type}/edit', [ProductTypeController::class, 'edit'])->name('product_types.edit');
     Route::put('/product-types/{product_type}', [ProductTypeController::class, 'update'])->name('product_types.update');
     Route::delete('/product-types/{product_type}', [ProductTypeController::class, 'destroy'])->name('product_types.destroy');
+
+        // Customer CRUD sve rute, sve zaštićene auth-om
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
+    Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
+    Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
+    Route::get('/customers/{customer}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 
 });

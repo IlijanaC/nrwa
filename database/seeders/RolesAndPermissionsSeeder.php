@@ -33,6 +33,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'create product_types',
             'edit product_types',
             'delete product_types',
+
+            // Customer Permissions
+            'view customers',
+            'create customers',
+            'edit customers',
+            'delete customers',
         ];
 
         foreach ($permissions as $permission) {
@@ -49,6 +55,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'view departments',
             'view products',
             'view product_types',
+            'view customers',
         ];
         $viewerRole->syncPermissions($viewerPermissions);
         $this->command->info('Viewer role created and permissions assigned.');
@@ -60,10 +67,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'view departments',
             'view products',
             'view product_types',
+            'view customers',
             // Plus create dozvole
             'create departments',
             'create products',
             'create product_types',
+            'create customers', 
         ];
         $editorRole->syncPermissions($editorPermissions);
         $this->command->info('Editor role created and permissions assigned.');

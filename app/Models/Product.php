@@ -81,4 +81,10 @@ class Product extends Model
     {
         return $this->belongsTo(ProductType::class, 'PRODUCT_TYPE_CD', 'PRODUCT_TYPE_CD');
     }
+
+    public function customers()
+{
+    return $this->belongsToMany(Customer::class, 'customer_product', 'PRODUCT_CD', 'CUST_ID');
+}
+
 }
